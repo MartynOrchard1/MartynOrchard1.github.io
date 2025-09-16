@@ -1,0 +1,10 @@
+<!doctype html><meta charset="utf-8">
+<script>
+  // Preserve both query (?code=...) and hash if present, then bounce to your app scheme.
+  const params = new URLSearchParams(location.search);
+  const hash = location.hash || "";
+  const target = "com.googleusercontent.apps.971309845644-atoo2nl2ceqjvbdhmo4iqdt7othvkr09:/oauth2redirect"
+               + (params.toString() ? "?" + params.toString() : "")
+               + hash;
+  location.replace(target);
+</script>

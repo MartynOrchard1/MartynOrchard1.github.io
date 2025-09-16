@@ -1,10 +1,24 @@
-<!doctype html><meta charset="utf-8">
+<!doctype html>
+<meta charset="utf-8" />
+<title>Redirecting to app…</title>
+<p>If you are not redirected automatically, tap the button below.</p>
+<a id="go" href="#">Open TuckBox</a>
+
 <script>
-  // Preserve both query (?code=...) and hash if present, then bounce to your app scheme.
   const params = new URLSearchParams(location.search);
   const hash = location.hash || "";
   const target = "com.googleusercontent.apps.971309845644-atoo2nl2ceqjvbdhmo4iqdt7othvkr09:/oauth2redirect"
                + (params.toString() ? "?" + params.toString() : "")
                + hash;
-  location.replace(target);
+
+  // Log for sanity (open browser menu → Developer tools if available)
+  console.log("Redirecting to:", target);
+
+  // Manual fallback
+  document.getElementById("go").setAttribute("href", target);
+
+  // Auto-redirect after a tiny delay (improves reliability)
+  setTimeout(() => {
+    window.location.href = target;
+  }, 200);
 </script>
